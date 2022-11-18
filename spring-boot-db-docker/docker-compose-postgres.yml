@@ -1,7 +1,7 @@
 version: '2'
 services:
   API:
-    image: 'springboot-databases-docker.jar'
+    image: 'springboot-databases-docker:latest'
     ports:
       - "8888:8080"
     depends_on:
@@ -16,13 +16,13 @@ services:
   PostgreSQL:
     image: postgres
     ports:
-      - "5432:5432"
+      - "15432:5432"
     environment:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_USER=admin
       - POSTGRES_DB=postgres-demo
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d postgres-demo"]
       interval: 10s
       timeout: 5s
       retries: 5
